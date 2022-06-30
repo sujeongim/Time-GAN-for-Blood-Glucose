@@ -1,22 +1,29 @@
-# Codebase for "Time-series Generative Adversarial Networks (TimeGAN)"
+# Codebase for "Time-series Generative Adversarial Networks (TimeGAN)", for Blood Glucose Level Data
+
+This directory is a partial modification of the the original TimeGAN code to allow TimeGAN to be also applied to blood glucose data.
+
+Original Paper: Jinsung Yoon, Daniel Jarrett, Mihaela van der Schaar, 
+"Time-series Generative Adversarial Networks," 
+Neural Information Processing Systems (NeurIPS), 2019.
 
 Authors: Jinsung Yoon, Daniel Jarrett, Mihaela van der Schaar
 
-Reference: Jinsung Yoon, Daniel Jarrett, Mihaela van der Schaar, 
-"Time-series Generative Adversarial Networks," 
-Neural Information Processing Systems (NeurIPS), 2019.
- 
 Paper Link: https://papers.nips.cc/paper/8789-time-series-generative-adversarial-networks
 
-Contact: sujeongim@postech.ac.kr
+Contact for code : sujeongim@postech.ac.kr
 
-This directory contains implementations of TimeGAN framework for synthetic time-series data generation using one synthetic dataset and two real-world datasets.
--   기존 Data
+## Data
+
+- Used Data
+   - Bloog Glucose Level Data of 20 Virtual T1DMS Patients 
+   
+-  Data for original Time-Series GAN
     -   Sine data: Synthetic
     -   Stock data: https://finance.yahoo.com/quote/GOOG/history?p=GOOG
     -   Energy data: http://archive.ics.uci.edu/ml/datasets/Appliances+energy+prediction
-- 사용 Data
-   - 가상 당뇨환자 20명의 혈당 데이터 
+
+
+## TimeGAN Tutorial
 
 To run the pipeline for training and evaluation on TimeGAN framwork, simply run 
 python3 -m main_timegan.py or see jupyter-notebook tutorial of TimeGAN in tutorial_timegan.ipynb.
@@ -24,7 +31,7 @@ python3 -m main_timegan.py or see jupyter-notebook tutorial of TimeGAN in tutori
 Note that any model architecture can be used as the generator and 
 discriminator model such as RNNs or Transformers. 
 
-### Code explanation
+## Code explanation
 
 (1) data_loading.py
 - Transform raw time-series data to preprocessed time-series data (Googld data)
@@ -49,7 +56,7 @@ discriminator model such as RNNs or Transformers.
 
 ### Command inputs:
 
--   data_name: sine, stock, or energy
+-   data_name: BG level(=Blood Glucose Level), sine, stock, or energy (we mainly used BG level)
 -   seq_len: sequence length
 -   module: gru, lstm, or lstmLN
 -   hidden_dim: hidden dimensions
@@ -63,7 +70,7 @@ Note that network parameters should be optimized for different datasets.
 ### Example command
 
 ```shell
-$ python3 main_timegan.py --data_name stock --seq_len 24 --module gru
+$ python3 main_timegan.py --data_name bg_level --seq_len 24 --module gru
 --hidden_dim 24 --num_layer 3 --iteration 50000 --batch_size 128 
 --metric_iteration 10
 ```
